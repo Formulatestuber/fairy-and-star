@@ -9,17 +9,17 @@ const Body = Matter.Body;
 
 function preload()
 {
-	starImg = loadImage("images/star.png");
-	fairyImg = loadAnimation("images/fairyImage1.png","images/fairyImage2.png");
-	bgImg = loadImage("images/starNight.png");
-	fairyVoice = loadSound("sound/JoyMusic.mp3");
+	starImg = loadImage("star.png");
+	fairyImg = loadAnimation("fairyImage1.png","fairyImage2.png");
+	bgImg = loadImage("starNight.png");
+	fairyVoice = loadSound("JoyMusic.mp3");
 
 }
 
 function setup() {
 	createCanvas(800, 750);
 
-	// fairyVoice.play();
+    fairyVoice.play();
 
 	fairy = createSprite(130, 520);
 	fairy.addAnimation("fairyflying",fairyImg);  
@@ -44,18 +44,17 @@ function setup() {
 function draw() {
   background(bgImg);
 
-  if (keyDown("RIGHT_ARROW")){
-	  fairy.x = fairy.x+5;
-  }
+star.x= starBody.position.x
+star.y= starBody.position.y
 
-  if (keyDown("LEFT_ARROW")){
-	  fairy.x = fairy.x-5;
-  }
-
-  star.velocityY = 3;
+  //star.velocityY = 3;
 
 if (fairy.isTouching(star)){
 	star.velocityY = 0;
+}
+
+if(star.y>470 && starBody.position.y >470){
+	Matter.Body.setStatic(starBody,true)
 }
 
  drawSprites();
@@ -64,4 +63,16 @@ if (fairy.isTouching(star)){
 
 function keyPressed() {
 	//write code here
+	if(keyCode === RIGHT_ARROW){
+		fairy.x=fairy.x+40
+	}
+
+	if(keyCode === LEFT_ARROW){
+		fairy.x=fairy.x-40
+	}
+
+	if(keyCode === DOWN_ARROW){
+		Matter.Body.setStatic(starBody,false)
+	}
+
 }
